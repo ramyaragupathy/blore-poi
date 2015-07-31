@@ -52,7 +52,7 @@ var map = L.mapbox.map('map', 'ruthmaben.0c95069b', {
 	});
 
 
-var baseLayers = {};
+var baseLayers = {L.heatLayer(latlngs, {radius: 25}).addTo(map);};
 
 //adding markerclusters
 
@@ -97,7 +97,7 @@ var overlays = {
 "ATM": atmCluster,
 "Metro": metroCluster
 };
-var heat = L.heatLayer(latlngs, {radius: 25}).addTo(map);
+
 L.control.layers(baseLayers, overlays).addTo(map);
 
 
