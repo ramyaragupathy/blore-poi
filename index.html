@@ -61,7 +61,7 @@ var restaurantCluster = new L.MarkerClusterGroup();
 var pubCluster = new L.MarkerClusterGroup();
 var atmCluster =new L.MarkerClusterGroup();
 var metroCluster = new L.MarkerClusterGroup();
-var heatMap = new L.TileLayer.HeatCanvas();
+//var heatMap = new L.TileLayer.HeatCanvas();
 // var myLayer = L.mapbox.featureLayer(); -> returns a map.layer
 // myLayer.setGeoJSON(busstopgeoJson);
 
@@ -97,7 +97,7 @@ var overlays = {
 "Pubs": pubCluster,
 "ATM": atmCluster,
 "Metro": metroCluster,
-"Heatmap":heatMap
+//"Heatmap":heatMap
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
