@@ -68,7 +68,7 @@ var metroCluster = new L.MarkerClusterGroup();
 var busStop = L.geoJson(busStop_geoJson,{
     pointToLayer: L.mapbox.marker.style,
 }); // returns a bunch of markers
-busStop.bindPopup(feature.properties.description);
+//busStop.bindPopup(feature.properties.description);
 busStopCluster.addLayer(busStop);
 
 var atm = L.geoJson(atm_geoJson,{
