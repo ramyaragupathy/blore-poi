@@ -57,12 +57,73 @@ var baseLayers = {};
 
 //adding markerclusters
 
-var busStopCluster = new L.MarkerClusterGroup();
-var restaurantCluster = new L.MarkerClusterGroup();
-var pubCluster = new L.MarkerClusterGroup();
-var atmCluster =new L.MarkerClusterGroup();
-var metroCluster = new L.MarkerClusterGroup();
-var foreignexchangeCluster = new L.MarkerClusterGroup();    
+var busStopCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#FE2E2E',
+          "marker-size": "large"
+        });
+      }
+    });
+var restaurantCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#F781F3',
+          "marker-size": "large"
+        });
+      }
+    });
+var pubCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#98292E',
+          "marker-size": "large"
+        });
+      }
+    });
+var atmCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#6b47b6',
+          "marker-size": "large"
+        });
+      }
+    });
+var metroCluster = new L.MarkerClusterGroup({
+     
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#424242',
+          "marker-size": "large"
+        });
+      }
+    });
+
+var foreignexchangeCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#FE2E2E',
+          "marker-size": "large"
+        });
+      }
+    });
 //var heatMap = new L.TileLayer.HeatCanvas();
 // var myLayer = L.mapbox.featureLayer(); -> returns a map.layer
 // myLayer.setGeoJSON(busstopgeoJson);
