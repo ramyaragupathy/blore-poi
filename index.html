@@ -69,33 +69,51 @@ var foreignexchangeCluster = new L.MarkerClusterGroup();
 
 var busStop = L.geoJson(busStop_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 
 busStopCluster.addLayer(busStop);
 
 var atm = L.geoJson(atm_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 atmCluster.addLayer(atm);
 
 var metro = L.geoJson(metro_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 metroCluster.addLayer(metro);
 
 var restaurant = L.geoJson(res_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 
 restaurantCluster.addLayer(restaurant);
 
 var foreignexchange = L.geoJson(foreignexchange_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 foreignexchangeCluster.addLayer(foreignexchange);
     
 var pub = L.geoJson(pub_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 
 pubCluster.addLayer(pub);
