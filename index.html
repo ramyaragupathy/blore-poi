@@ -9,7 +9,8 @@
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-<script src="leaflet-heat.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
 <style>
   body { margin:0; padding:0; }
@@ -39,56 +40,192 @@
 <script src="pub.js"></script>
 <script src="metro.js"></script>
 <script>
+
 L.mapbox.accessToken = 'pk.eyJ1IjoicmFteWFyYWd1cGF0aHkiLCJhIjoiOHRoa2JJTSJ9.6Y38XMOQL80LZyrUAjXgIg';
-var southWest = L.latLng(12.675, 77.475),
-    northEast = L.latLng(13.880, 77.900),
+var south=12.675,north=13.880,west=77.475,east=77.900;
+
+var southWest = L.latLng(south, west),
+    northEast = L.latLng(north, east),
     bounds = L.latLngBounds(southWest, northEast);
 
-//12.9678/77.5867
+var bbox =south + ',' + west+ ',' + north + ',' + east;
 var map = L.mapbox.map('map', 'ruthmaben.0c95069b', {
   maxBounds: bounds,
     maxZoom: 19,
     minZoom: 10
 	});
-
+/*
+var Stamen_Watercolor = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 1,
+  maxZoom: 16,
+  ext: 'png'
+});*/
 
 var baseLayers = {};
+/*
+var head='http://overpass-api.de/api/interpreter?data=[out:json][timeout:60];'
+var body='(node[“amenity”=”pub”]'+'('+ bbox + ');';
+var tail = 'out skel qt;'
+var query = head + body + tail;
+ console.log(query);
+$.ajax(query)*/
 
+       
+
+//custom tile layer
+/*var tileLayerUrl = 'http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png';
+var tileLayerAttribution = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+L.tileLayer(tileLayerUrl, {
+  attribution: tileLayerAttribution
+}).addTo(map); */
+/*
+var myLayer = L.geoJson().addTo(map);
+
+function get_coords(){
+var bounds = map.getBounds();
+
+var loc= bounds.toBBoxString();
+
+ var bounds_values= loc.split(",");
+ var  west = bounds_values[0], 
+      south = bounds_values[1], 
+      east = bounds_values[2], 
+      north = bounds_values[3];
+ var bbox = south + "," + west + "," + north + "," + east;
+ return bbox;
+}
+async.map queryOverpass, function (err, results) {
+
+    // offer to download
+    console.log('all results in', osmData);
+
+    
+});*/
+
+/*
+function queryOverpass (u, callback) {
+    console.log(u); 
+    console.log(q);
+    query_overpass(util.format(query), function (err, data) {
+        Array.prototype.push.apply(osmData.features, data.features);
+        callback(null, u);
+    });
+}
+
+ var osmData = {
+    'type': "FeatureCollection",
+    'features': []
+};
+function processResults(err, data) {
+    console.log('data', data);
+    // osmData.features.concat(data.features);
+    Array.prototype.push.apply(osmData.features, data.features);
+    // _.extend(osmData.features, data.features);
+    console.log('osmData', osmData);
+}
+
+query_overpass(util.format(query), processResults);
+var test= osmData;*/
 //adding markerclusters
-
-var busStopCluster = new L.MarkerClusterGroup();
-var restaurantCluster = new L.MarkerClusterGroup();
-var pubCluster = new L.MarkerClusterGroup();
-var atmCluster =new L.MarkerClusterGroup();
-var metroCluster = new L.MarkerClusterGroup();
-//var heatMap = new L.TileLayer.HeatCanvas();
-// var myLayer = L.mapbox.featureLayer(); -> returns a map.layer
-// myLayer.setGeoJSON(busstopgeoJson);
+var busStopCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#FE2E2E',
+          "marker-size": "large"
+        });
+      }
+    });
+var restaurantCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#F781F3',
+          "marker-size": "large"
+        });
+      }
+    });
+var pubCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#98292E',
+          "marker-size": "large"
+        });
+      }
+    });
+var atmCluster = new L.MarkerClusterGroup({
+      
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#6b47b6',
+          "marker-size": "large"
+        });
+      }
+    });
+var metroCluster = new L.MarkerClusterGroup({
+     
+      iconCreateFunction: function(cluster) {
+        return L.mapbox.marker.icon({
+          // show the number of markers in the cluster on the icon.
+          'marker-symbol': cluster.getChildCount(),
+          'marker-color': '#424242',
+          "marker-size": "large"
+        });
+      }
+    });
 
 var busStop = L.geoJson(busStop_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
+
 
 busStopCluster.addLayer(busStop);
 
+
 var atm = L.geoJson(atm_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 atmCluster.addLayer(atm);
 
 var metro = L.geoJson(metro_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 metroCluster.addLayer(metro);
 
 var restaurant = L.geoJson(res_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 
 restaurantCluster.addLayer(restaurant);
 
 var pub = L.geoJson(pub_geoJson,{
     pointToLayer: L.mapbox.marker.style,
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(feature.properties.name); //adding popups
+    }
 }); // returns a bunch of markers
 
 pubCluster.addLayer(pub);
@@ -98,11 +235,10 @@ var overlays = {
 "Pubs": pubCluster,
 "ATM": atmCluster,
 "Metro": metroCluster,
-//"Heatmap":heatMap
+
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
-
 
 
 
