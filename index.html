@@ -38,10 +38,11 @@
 <script src="res.js"></script>
 <script src="pub.js"></script>
 <script src="metro.js"></script>
+<script src="foreignexchange.js"></script>   
 <script>
 L.mapbox.accessToken = 'pk.eyJ1IjoicmFteWFyYWd1cGF0aHkiLCJhIjoiOHRoa2JJTSJ9.6Y38XMOQL80LZyrUAjXgIg';
-var southWest = L.latLng(12.675, 77.475),
-    northEast = L.latLng(13.880, 77.900),
+var southWest = L.latLng(14.10, 74.99),
+    northEast = L.latLng(11.36, 79.98),
     bounds = L.latLngBounds(southWest, northEast);
 
 //12.9678/77.5867
@@ -61,6 +62,7 @@ var restaurantCluster = new L.MarkerClusterGroup();
 var pubCluster = new L.MarkerClusterGroup();
 var atmCluster =new L.MarkerClusterGroup();
 var metroCluster = new L.MarkerClusterGroup();
+var foreignexchangeCluster = new L.MarkerClusterGroup();    
 //var heatMap = new L.TileLayer.HeatCanvas();
 // var myLayer = L.mapbox.featureLayer(); -> returns a map.layer
 // myLayer.setGeoJSON(busstopgeoJson);
@@ -87,6 +89,11 @@ var restaurant = L.geoJson(res_geoJson,{
 
 restaurantCluster.addLayer(restaurant);
 
+var foreignexchange = L.geoJson(foreignexchange_geoJson,{
+    pointToLayer: L.mapbox.marker.style,
+}); // returns a bunch of markers
+foreignexchangeCluster.addLayer(foreignexchange);
+    
 var pub = L.geoJson(pub_geoJson,{
     pointToLayer: L.mapbox.marker.style,
 }); // returns a bunch of markers
@@ -98,6 +105,7 @@ var overlays = {
 "Pubs": pubCluster,
 "ATM": atmCluster,
 "Metro": metroCluster,
+"Foreign Exchange": foreignexchangeCluster,
 //"Heatmap":heatMap
 };
 
@@ -111,3 +119,4 @@ L.control.layers(baseLayers, overlays).addTo(map);
 
 </body>
 </html>
+    
