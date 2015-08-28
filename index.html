@@ -191,10 +191,7 @@ foreignexchangeCluster.addLayer(foreignexchange);
 var pub = L.geoJson(pub_geoJson,{
     pointToLayer: L.mapbox.marker.style,
     onEachFeature: function (feature, layer) {
-    	var content = '<body bgcolor="#E6E6FA">'+'<h2>feature.properties.name<\/h2>' +
-        '<\/body>';
-    layer.bindPopup(content);
-      //layer.bindPopup(feature.properties.name); //adding popups
+    layer.bindPopup(feature.properties.name); //adding popups
     }
 }); // returns a bunch of markers
 
