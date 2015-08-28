@@ -62,6 +62,7 @@ var restaurantCluster = new L.MarkerClusterGroup();
 var pubCluster = new L.MarkerClusterGroup();
 var atmCluster =new L.MarkerClusterGroup();
 var metroCluster = new L.MarkerClusterGroup();
+var foreignexchangeCluster = new L.MarkerClusterGroup();    
 //var heatMap = new L.TileLayer.HeatCanvas();
 // var myLayer = L.mapbox.featureLayer(); -> returns a map.layer
 // myLayer.setGeoJSON(busstopgeoJson);
@@ -88,6 +89,11 @@ var restaurant = L.geoJson(res_geoJson,{
 
 restaurantCluster.addLayer(restaurant);
 
+var foreignexchange = L.geoJson(foreignexchange_geoJson,{
+    pointToLayer: L.mapbox.marker.style,
+}); // returns a bunch of markers
+foreignexchangeCluster.addLayer(foreignexchange);
+    
 var pub = L.geoJson(pub_geoJson,{
     pointToLayer: L.mapbox.marker.style,
 }); // returns a bunch of markers
@@ -99,6 +105,7 @@ var overlays = {
 "Pubs": pubCluster,
 "ATM": atmCluster,
 "Metro": metroCluster,
+"Foreign Exchange": foreignexchangeCluster,
 //"Heatmap":heatMap
 };
 
